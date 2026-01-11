@@ -19,13 +19,39 @@ import sys
 #                                          '$$k.
 #                     noMoreUPX! build date 01/09/2026
 #                                sintax@exploit.im
+
+
 UPX_STRINGS = [
     b"$Id: UPX ",
     b'UPX!',
     b'$Info: This file is packed with the UPX executable packer http://upx.sf.net $',
     b'$Id: UPX 4.22 Copyright (C) 1996-2024 the UPX Team. All Rights Reserved. $',
     b'UPX!u',
-    b"http://upx.sf.net" # Added: UPX website reference
+    b"http://upx.sf.net", # Added: UPX website reference
+    b"UPX packed",
+    b"packed by UPX",
+    b"UPX compressed",
+    b"UPX wrapper",
+    b"UPX runtime",
+    # UPX metadata
+    b"UPX_MAGIC",
+    b"UPX_HEADER",
+    b"UPX_CONFIG",
+    b"UPX_SECTION",
+    b"the UPX Team",
+    b"executable packer",
+    b"UPX stub",    # UPX stub reference
+    b"UPX loader",  # UPX loader reference
+    b"UPX protected", # UPX protection marker
+    b"LZMA",        # UPX compression algorithm
+    b"NRV2",        # NRV compression (UPX variant)
+    b"NRV2B",       # NRV2B compression
+    b"NRV2D",       # NRV2D compression
+    b"NRV2E",       # NRV2E compression
+    b"DLY",         # UPX delay load
+    b"UPX",         # Generic UPX marker
+
+]
 ]
 
 def fuzz_file(filename):
