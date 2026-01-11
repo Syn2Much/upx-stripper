@@ -4,16 +4,15 @@
 ## 📋 Features
 
 ### 🔍 **Enhanced Detection**
-- 35+ UPX signatures, patterns, and artifacts
-- Hex pattern detection (0x555058, 0x55505821)
+- 25+ UPX signatures, patterns, and artifacts
 - Version strings, copyright notices, and metadata
 - Cross-platform markers (PE, ELF, Mach-O)
 
 ### 🛡️ **Smart Obfuscation**
 - Intelligent padding with mixed strategies:
-  - Valid x86 opcodes for plausible deniability
-  - Structured but meaningless data patterns
-  - Truly random bytes for maximum entropy
+- Valid x86 opcodes for plausible deniability
+- Structured but meaningless data patterns
+- Truly random bytes for maximum entropy
 - Context-aware replacement strategies
 - No obvious patterns (unlike null bytes)
 
