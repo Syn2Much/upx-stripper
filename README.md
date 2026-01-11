@@ -1,4 +1,5 @@
-# noMoreUPX! ☠️
+# noMoreUPX! ☠️ 
+## Enjoy the compression and beneifts of UPX packing without the artifacts that pop out in anaylsis. 
 
 ## 📋 Features
 
