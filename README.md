@@ -1,7 +1,5 @@
 # noMoreUPX! 🔧
 
-**Advanced UPX Pattern Removal Tool with Intelligent Obfuscation & Backup System**
-
 A professional-grade tool for detecting and removing UPX packer signatures from files, featuring intelligent obfuscation, automatic backups, and comprehensive logging.
 
 ##
