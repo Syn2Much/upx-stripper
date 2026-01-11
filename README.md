@@ -270,7 +270,7 @@ NOT for:
 - Unauthorized modification of software
 ```
 
-**Author:** sintax@exploit.im  
+**Author:** Syn
 **Build Date:** 01/09/2026  
 **Version:** 2.1 (Enhanced with backup system)
 
