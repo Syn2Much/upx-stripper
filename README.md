@@ -125,11 +125,12 @@ backup_targetname_YYYYMMDD_HHMMSS/
 - Preserves original functionality
 ```
 
+
 ---
 
 ## 📊 Output Example
 
-<img width="739" height="1143" alt="Screenshot 2026-01-10 200945" src="https://github.com/user-attachments/assets/4843c0e8-d1b6-4c0a-9407-574ca3bcc447" />
+<img width="1288" height="1227" alt="Screenshot 2026-01-10 205707" src="https://github.com/user-attachments/assets/5c122292-15c0-4ad9-b8f3-f8ab757c77b1" />
 
 
 ### Obfuscation Characteristics
