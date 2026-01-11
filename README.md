@@ -4,6 +4,8 @@
 
 A professional-grade tool for detecting and removing UPX packer signatures from files, featuring intelligent obfuscation, automatic backups, and comprehensive logging.
 
+##
+![Animation](https://github.com/user-attachments/assets/ee546d59-f75c-43cc-8259-ec6006f88843)
 ---
 
 ## 📋 Features
