@@ -19,16 +19,16 @@ sudo cp noMoreUPX.py /usr/local/bin/nomoreupx  # optional
 ## Usage
 ```bash
 # single file
-./noMoreUPX.py suspicious.exe
+python3 noMoreUPX.py suspicious.exe
 
 # directory (recursive)
-./noMoreUPX.py ./samples/
+python3 noMoreUPX.py ./samples/
 
 # scan only
-./noMoreUPX.py target.bin --dry-run
+python3 noMoreUPX.py target.bin --dry-run
 
 # verbose
-./noMoreUPX.py ./samples/ --verbose
+python3 noMoreUPX.py ./samples/ --verbose
 ```
 
 ## What it does (high level)
