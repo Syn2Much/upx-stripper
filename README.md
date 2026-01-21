@@ -40,6 +40,10 @@ python3 noMoreUPX.py ./samples/ --verbose
 - Always run **`--dry-run` first** and test on copies.
 - See `operation.log` inside the backup directory for details.
 
+## Operation.log
+<img width="1695" height="810" alt="Screenshot 2026-01-20 203539" src="https://github.com/user-attachments/assets/0fd4dac1-e646-46bd-ab72-e1f5ef7d3cd7" />
+
+
 ## License / Disclaimer
 **Educational use only.** Use responsibly and only with proper authorization.
 
