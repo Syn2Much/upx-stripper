@@ -25,8 +25,8 @@ from typing import Dict, List, Tuple, Optional
 # $$$$    J$$$F     {E      .$.         '$$$$$
 #  "$$$$$$$$$"   ..u$$u..  uz$$bu         #$$$
 #                                          '$$k.
-#                     noMoreUPX! V2 01/22/2026
-#                               
+#                     noMoreUPX! V3 01/28/2026
+#
 
 
 # Configure logging
@@ -87,7 +87,48 @@ UPX_STRINGS = [
     b"Markus Oberhumer",
     b"Laszlo Molnar",
     b"John F. Reiser",
+    # PE/DLL specific patterns
+    b"UPX!",
+    b"\x55\x50\x58\x21",  # UPX! in hex
+    b"UPX0\x00",
+    b"UPX1\x00",
 ]
+
+# Binary file extensions to always process
+BINARY_EXTENSIONS = {
+    ".exe",
+    ".dll",
+    ".sys",
+    ".drv",
+    ".ocx",
+    ".cpl",
+    ".scr",  # Windows
+    ".so",
+    ".dylib",
+    ".bundle",  # Linux/macOS
+    ".elf",
+    ".bin",
+    ".o",
+    ".ko",  # Generic binary
+    ".axf",
+    ".prx",
+    ".puff",
+    ".out",  # Other
+    ".mips",
+    ".arm",
+    ".x86",
+    ".x86_64",
+    ".aarch64",
+    ".mipsel",
+    ".armv7",
+    ".armv6",
+    ".powerpc",
+    ".ppc",
+    ".sparc",
+    ".m68k",
+    ".sh4",
+    ".arc",  # Architecture-specific binaries
+}
 
 
 class BackupManager:
@@ -242,13 +283,27 @@ def scan_upx_patterns(data: bytes) -> List[bytes]:
 
 
 def is_likely_binary(filepath: str) -> bool:
-    """Check if file is likely binary by sampling first 8KB"""
+    """Check if file is likely binary by extension and content sampling"""
     try:
+        # Check extension first - always process known binary types
+        ext = Path(filepath).suffix.lower()
+        if ext in BINARY_EXTENSIONS:
+            logger.debug(f"Binary extension detected: {ext}")
+            return True
+
         with open(filepath, "rb") as f:
             chunk = f.read(8192)
 
         if not chunk:
             return False
+
+        # Check for PE header (MZ) - Windows executables/DLLs
+        if chunk[:2] == b"MZ":
+            return True
+
+        # Check for ELF header - Linux binaries
+        if chunk[:4] == b"\x7fELF":
+            return True
 
         # Check for null bytes (binary indicator)
         if b"\x00" in chunk:
@@ -258,6 +313,9 @@ def is_likely_binary(filepath: str) -> bool:
         text_chars = sum(1 for b in chunk if 32 <= b <= 126 or b in (9, 10, 13))
         return (text_chars / len(chunk)) < 0.75
 
+    except PermissionError:
+        logger.warning(f"Permission denied checking: {filepath}")
+        return True  # Try to process anyway
     except Exception as e:
         logger.debug(f"Error checking if binary {filepath}: {e}")
         return True  # Assume binary on error
@@ -328,8 +386,23 @@ def process_file(
         return results
 
     except PermissionError as e:
-        results["error"] = f"Permission denied: {e}"
-        logger.warning(f"Permission denied: {filepath}")
+        results["error"] = f"Permission denied (file may be in use): {e}"
+        logger.warning(
+            f"Permission denied: {filepath} - File may be locked/in use by system"
+        )
+        return results
+    except OSError as e:
+        if e.errno == 13:  # Permission denied
+            results["error"] = "File is locked or in use"
+            logger.warning(f"File locked/in use: {filepath}")
+        elif e.errno == 32:  # Sharing violation (Windows)
+            results["error"] = "File in use by another process"
+            logger.warning(
+                f"Sharing violation: {filepath} - Close applications using this DLL"
+            )
+        else:
+            results["error"] = str(e)
+            logger.error(f"OS error processing {filepath}: {e}")
         return results
     except MemoryError:
         results["error"] = "File too large to process"
