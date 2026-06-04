@@ -1,5 +1,12 @@
 # NoMoreUPX! 
 
+## What it does (High Level)
+
+1. **Detects** common UPX markers (strings/sections/URLs/etc.)
+2. **Creates backups** in a timestamped folder (with hashed names + comprehensive log)
+3. **Replaces** detected markers with realistic, high-entropy padding (unique per hit)
+4. **Logs** all operations with detailed information for debugging
+
 ## Features
 
 - **Detection:** 28+ UPX strings/artifacts (magic bytes, section names, URLs, metadata, version strings)
@@ -52,13 +59,6 @@ optional arguments:
   -v, --verbose         Show detailed information during processing
   -l, --log FILE        Write debug log to specified file
 ```
-
-## What it does (High Level)
-
-1. **Detects** common UPX markers (strings/sections/URLs/etc.)
-2. **Creates backups** in a timestamped folder (with hashed names + comprehensive log)
-3. **Replaces** detected markers with realistic, high-entropy padding (unique per hit)
-4. **Logs** all operations with detailed information for debugging
 
 ## Advanced Features
 
