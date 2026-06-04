@@ -1,9 +1,5 @@
 # NoMoreUPX! 
 
-> 03/28/2026 - This tool is no longer being updated. For a more comprehensive UPX strip please refer to my custom UPX fork **m30w packer** https://github.com/Syn2Much/m30w-packer
-
-
-
 ## Features
 
 - **Detection:** 28+ UPX strings/artifacts (magic bytes, section names, URLs, metadata, version strings)
